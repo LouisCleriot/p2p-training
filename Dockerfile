@@ -7,7 +7,7 @@ COPY ./package.json /app/package.json
 
 # Install necessary dependencies
 RUN apt-get update && \
-    apt-get install -y software-properties-common curl gnupg ca-certificates
+    apt-get install -y software-properties-common curl gnupg ca-certificates wget
 
 # Add the GPG key for the Ethereum repository
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1C52189C923F6CA9
@@ -40,6 +40,20 @@ RUN mkdir -p /ethereum_data
 
 # Expose ports for Ethereum JSON-RPC and P2P communication
 EXPOSE 8545 30303
+
+# Install IPFS
+RUN curl -O https://dist.ipfs.io/go-ipfs/v0.9.1/go-ipfs_v0.9.1_linux-amd64.tar.gz
+RUN tar xvfz go-ipfs_v0.9.1_linux-amd64.tar.gz
+RUN mv go-ipfs/ipfs /usr/local/bin/ipfs
+
+# install maj ipfs
+RUN wget https://dist.ipfs.tech/ipfs-update/v1.9.0/ipfs-update_v1.9.0_linux-amd64.tar.gz
+RUN tar -xvzf ipfs-update_v1.9.0_linux-amd64.tar.gz
+RUN cd ipfs-update && ./install.sh
+RUN ipfs-update install latest
+
+# Initialize IPFS
+RUN ipfs init
 
 # Set the command to start a bash session
 CMD ["bash"]
