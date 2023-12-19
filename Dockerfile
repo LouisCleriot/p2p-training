@@ -29,5 +29,17 @@ RUN apt-get update
 RUN apt-get install nodejs -y
 RUN npm install 
 
+# Install Ethereum client (geth)
+RUN apt-get install -y ethereum
+
+# Create a data directory for the Ethereum blockchain
+RUN mkdir -p /ethereum_data
+
+# Initialize the Ethereum blockchain
+# RUN geth --datadir /ethereum_data init /app/genesis.json
+
+# Expose ports for Ethereum JSON-RPC and P2P communication
+EXPOSE 8545 30303
+
 # Set the command to start a bash session
 CMD ["bash"]
