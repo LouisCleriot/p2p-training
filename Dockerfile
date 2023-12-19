@@ -50,7 +50,7 @@ RUN mv go-ipfs/ipfs /usr/local/bin/ipfs
 RUN wget https://dist.ipfs.tech/ipfs-update/v1.9.0/ipfs-update_v1.9.0_linux-amd64.tar.gz
 RUN tar -xvzf ipfs-update_v1.9.0_linux-amd64.tar.gz
 RUN cd ipfs-update && ./install.sh
-RUN ipfs-update install latest
+#RUN ipfs-update install latest
 
 # Initialize IPFS
 RUN ipfs init
