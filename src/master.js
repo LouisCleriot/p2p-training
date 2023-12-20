@@ -13,7 +13,7 @@ import { mdns } from '@libp2p/mdns'
 
 const config = {
     addresses: {
-      listen: ['/ip4/0.0.0.0/tcp/0']
+      listen: ['/ip4/0.0.0.0/tcp/0', '/ip4/0.0.0.0/tcp/0/ws']
     },
     transports: [tcp(), webSockets()],
     streamMuxers: [yamux(), mplex()],
@@ -65,4 +65,8 @@ node.services.pubsub.addEventListener('message', async (evt) => {
     result.push(msg)
     console.log(result)
   }
+})
+
+node.addEventListener('peer:discovery', (evt) => {
+  console.log(`Found peer ${evt.detail}`)
 })

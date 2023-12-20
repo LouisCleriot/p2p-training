@@ -15,7 +15,7 @@ import { mdns } from '@libp2p/mdns'
 const bootstrapNode = ['/ip4/127.0.0.1/tcp/46687/p2p/12D3KooWNFcUnqH1kiU13LqLzjNBtjrVGL9QqVznbrDjKWzfvWjb']
 const config = {
     addresses: {
-      listen: ['/ip4/0.0.0.0/tcp/0']
+      listen: ['/ip4/0.0.0.0/tcp/0', '/ip4/0.0.0.0/tcp/0/ws']
     },
     transports: [tcp(), webSockets()],
     streamMuxers: [yamux(), mplex()],
