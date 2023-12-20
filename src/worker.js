@@ -12,7 +12,7 @@ import { pubsubPeerDiscovery } from '@libp2p/pubsub-peer-discovery'
 import { training, predict } from './train.js';
 import { mdns } from '@libp2p/mdns'
 
-const bootstrapNode = ['/ip4/172.17.0.2/tcp/33121/p2p/12D3KooWRzAsUKaSjfaXcQ2DGZ1vvdi2pd9gX7N7K5SK1vFdDqFL']
+const bootstrapNode = ['/ip4/10.238.189.164/tcp/43685/p2p/12D3KooWFLrvMzKGzUbib3hoBGcaHsyqZN6gaKGxoLkXyAM8c5Bc']
 const config = {
     addresses: {
       listen: ['/ip4/0.0.0.0/tcp/0', '/ip4/0.0.0.0/tcp/0/ws']
