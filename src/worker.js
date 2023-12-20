@@ -14,7 +14,7 @@ import { mdns } from '@libp2p/mdns'
 import { kadDHT } from '@libp2p/kad-dht'
 import { peerIdFromString } from '@libp2p/peer-id'
 
-const bootstrapNode = ['/ip4/10.238.189.164/tcp/32897/p2p/12D3KooWEJ1pb3kawQ9qXHYaMN38fQe8WkTSPm4LGotMaAwTFijJ']
+const bootstrapNode = ['/ip4/172.17.0.2/tcp/39041/p2p/12D3KooWKCsin5GdGmPEnhhSGT4aq6PspRYBnQPVebqMxyGaRear','/ip4/127.0.0.1/tcp/39041/p2p/12D3KooWKCsin5GdGmPEnhhSGT4aq6PspRYBnQPVebqMxyGaRear','/ip4/127.0.0.1/tcp/38799/ws/p2p/12D3KooWKCsin5GdGmPEnhhSGT4aq6PspRYBnQPVebqMxyGaRear','/ip4/172.17.0.2/tcp/38799/ws/p2p/12D3KooWKCsin5GdGmPEnhhSGT4aq6PspRYBnQPVebqMxyGaRear']
 const config = {
     addresses: {
       listen: ['/ip4/0.0.0.0/tcp/0', '/ip4/0.0.0.0/tcp/0/ws']

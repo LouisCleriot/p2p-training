@@ -32,10 +32,6 @@ const config = {
     services: {
       pubsub: gossipsub(),
       identify: identify(),
-      dht: kadDHT({
-        kBucketSize: 20,
-        clientMode: false,
-    }),
     },
   }
 
