@@ -11,8 +11,10 @@ import { webSockets } from '@libp2p/websockets'
 import { pubsubPeerDiscovery } from '@libp2p/pubsub-peer-discovery'
 import { training, predict } from './train.js';
 import { mdns } from '@libp2p/mdns'
+import { kadDHT } from '@libp2p/kad-dht'
+import { peerIdFromString } from '@libp2p/peer-id'
 
-const bootstrapNode = ['/ip4/10.238.189.164/tcp/43685/p2p/12D3KooWFLrvMzKGzUbib3hoBGcaHsyqZN6gaKGxoLkXyAM8c5Bc']
+const bootstrapNode = ['/ip4/10.238.189.164/tcp/32897/p2p/12D3KooWEJ1pb3kawQ9qXHYaMN38fQe8WkTSPm4LGotMaAwTFijJ']
 const config = {
     addresses: {
       listen: ['/ip4/0.0.0.0/tcp/0', '/ip4/0.0.0.0/tcp/0/ws']
@@ -34,7 +36,11 @@ const config = {
     ],
     services: {
       pubsub: gossipsub(),
-      identify: identify()
+      identify: identify(),
+      dht: kadDHT({
+        kBucketSize: 20,
+        clientMode: false,
+    }),
     },
   }
   

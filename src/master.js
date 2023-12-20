@@ -9,6 +9,8 @@ import { identify } from '@libp2p/identify'
 import { gossipsub } from '@chainsafe/libp2p-gossipsub'
 import { pubsubPeerDiscovery } from '@libp2p/pubsub-peer-discovery'
 import { mdns } from '@libp2p/mdns'
+import { kadDHT } from '@libp2p/kad-dht'
+import { peerIdFromString } from '@libp2p/peer-id'
 
 
 const config = {
@@ -25,12 +27,16 @@ const config = {
       mdns({
         interval: 2000,
         enabled: true
-      })
+      }),
     ],
     services: {
       pubsub: gossipsub(),
-      identify: identify()
-    }
+      identify: identify(),
+      dht: kadDHT({
+        kBucketSize: 20,
+        clientMode: false,
+    }),
+    },
   }
 
 const node = await createLibp2p(config)
