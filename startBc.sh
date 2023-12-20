@@ -1,1 +1,2 @@
 geth --datadir ./node1 init genesis.json
+geth --datadir ./node2 --syncmode "full" --port 30304 --http --http.addr "localhost" --http.port 8552 --http.api "personal,eth,net,web3,txpool,miner,admin" --http.corsdomain="*" --networkid 2345 --allow-insecure-unlock --authrpc.port 8553 console --ipcdisable
