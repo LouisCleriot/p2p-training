@@ -8,6 +8,7 @@ import { yamux } from '@chainsafe/libp2p-yamux'
 import { identify } from '@libp2p/identify'
 import { gossipsub } from '@chainsafe/libp2p-gossipsub'
 import { pubsubPeerDiscovery } from '@libp2p/pubsub-peer-discovery'
+import { mdns } from '@libp2p/mdns'
 
 
 const config = {
@@ -20,6 +21,10 @@ const config = {
     peerDiscovery: [
       pubsubPeerDiscovery({
         interval: 1000
+      }),
+      mdns({
+        interval: 2000,
+        enabled: true
       })
     ],
     services: {

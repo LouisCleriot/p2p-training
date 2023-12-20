@@ -10,8 +10,9 @@ import { tcp } from '@libp2p/tcp'
 import { webSockets } from '@libp2p/websockets'
 import { pubsubPeerDiscovery } from '@libp2p/pubsub-peer-discovery'
 import { training, predict } from './train.js';
+import { mdns } from '@libp2p/mdns'
 
-const bootstrapNode = ['/ip4/127.0.0.1/tcp/36595/p2p/12D3KooW9t3pF6ZxmpxCtfdtQhwNtdAyXN3Huq9PizERhfxWkXR4']
+const bootstrapNode = ['/ip4/127.0.0.1/tcp/46687/p2p/12D3KooWNFcUnqH1kiU13LqLzjNBtjrVGL9QqVznbrDjKWzfvWjb']
 const config = {
     addresses: {
       listen: ['/ip4/0.0.0.0/tcp/0']
@@ -22,6 +23,10 @@ const config = {
     peerDiscovery: [
       pubsubPeerDiscovery({
         interval: 1000
+      }),
+      mdns({
+        interval: 2000,
+        enabled: true
       }),
       bootstrap({
         list: bootstrapNode
