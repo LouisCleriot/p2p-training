@@ -24,6 +24,7 @@
     "@libp2p/pubsub-peer-discovery": "^10.0.2",
     "@libp2p/tcp": "^9.0.8",
     "@libp2p/websockets": "^8.0.8",
+    "@tensorflow/tfjs": "^4.15.0",
     "libp2p": "^1.0.11"
   }
 }

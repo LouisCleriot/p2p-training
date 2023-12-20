@@ -9,9 +9,9 @@ import { identify } from '@libp2p/identify'
 import { tcp } from '@libp2p/tcp'
 import { webSockets } from '@libp2p/websockets'
 import { pubsubPeerDiscovery } from '@libp2p/pubsub-peer-discovery'
+import { training, predict } from './train.js';
 
-
-const bootstrapNode = ['/ip4/127.0.0.1/tcp/35203/p2p/12D3KooWL656Xmq2fx8QNPYoiHm8Do2MEESmAbssHwhhfZbypQhv']
+const bootstrapNode = ['/ip4/127.0.0.1/tcp/36595/p2p/12D3KooW9t3pF6ZxmpxCtfdtQhwNtdAyXN3Huq9PizERhfxWkXR4']
 const config = {
     addresses: {
       listen: ['/ip4/0.0.0.0/tcp/0']
@@ -69,10 +69,22 @@ node.addEventListener('peer:disconnect', (evt) => {
 //})
 
 node.services.pubsub.subscribe('trigger')
+node.services.pubsub.subscribe('result')
+node.services.pubsub.subscribe('predict')
 
-node.services.pubsub.addEventListener('message', (evt) => {
+node.services.pubsub.addEventListener('message', async (evt) => {
     // check if the message is from subscribed topic
     if (evt.detail.topic == 'trigger'){
-      console.log(`${evt.detail.topic}:`, new TextDecoder().decode(evt.detail.data))
+      const msg = new TextDecoder().decode(evt.detail.data)
+      console.log(`${evt.detail.topic}:`, msg)
+      // parse the message 'NB=X, TYPE=Y'
+      await training(msg)
+    }
+    if (evt.detail.topic == 'predict'){
+      const msg = new TextDecoder().decode(evt.detail.data)
+      console.log(`${evt.detail.topic}:`, msg)
+      const result = await predict(msg)
+      console.log(result)
+      node.services.pubsub.publish('result', new TextEncoder().encode(result))
     }
 })

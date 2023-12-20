@@ -30,6 +30,7 @@ const config = {
 
 const node = await createLibp2p(config)
 const bootstrapperMultiaddrs = node.getMultiaddrs().map((m) => m.toString())
+const result = []
 
 console.log('master node start with the address :', bootstrapperMultiaddrs)
 
@@ -38,9 +39,25 @@ console.log('master node start with the address :', bootstrapperMultiaddrs)
 //})
 
 node.services.pubsub.subscribe('trigger')
+node.services.pubsub.subscribe('result')
+node.services.pubsub.subscribe('predict')
 
 const stdin = process.openStdin()
 stdin.addListener('data', (d) => {
-  node.services.pubsub.publish('trigger', new TextEncoder().encode(d))
+  if (d.toString().startsWith('train: ')) {
+    d = d.toString().replace('train: ', '')
+    node.services.pubsub.publish('trigger', new TextEncoder().encode(d))
+  } else if (d.toString().startsWith('predict')) {
+    d = d.toString().replace('predict: ', '')
+    node.services.pubsub.publish('predict', new TextEncoder().encode(d))
+  } 
 })
 
+node.services.pubsub.addEventListener('message', async (evt) => {
+  // check if the message is from subscribed topic
+  if (evt.detail.topic == 'result'){
+    const msg = new TextDecoder().decode(evt.detail.data)
+    result.push(msg)
+    console.log(result)
+  }
+})
