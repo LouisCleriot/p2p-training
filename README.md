@@ -7,7 +7,7 @@
 
 ## Description
 
-This small project consist in 2 script that allow training boosting ai model using peer2peer network in a local network using libp2p to create and manage communication between node and ipfs to store and retrieve data.  
+This small project consist in 2 script that allow training bagging ai model using peer2peer network in a local network using libp2p to create and manage communication between node and ipfs to store and retrieve data.  
 
 ## Usage
 
